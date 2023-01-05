@@ -116,6 +116,24 @@ void syncPrebootKC(NSString *prebootPath, NSString *systemPath) {
     [task waitUntilExit];
 }
 
+void restartSystem(void) {
+  NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
+
+  char *restartArgs[] = {
+    "/sbin/shutdown",
+    "-r",
+    "now",
+    "RSRRepair is rebooting.",
+    NULL
+  };
+
+  // This should never return.
+  int ret = execv(restartArgs[0], restartArgs);
+  if (ret == -1) {
+    NSLog(@"RSRRepair: Failed to execute %s", restartArgs[0]);
+  }
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         if (geteuid()) {
@@ -133,7 +151,7 @@ int main(int argc, const char * argv[]) {
             NSString *dataVolAuxKCPath = @DATAVOL_AUXKC;
             NSString *sysVolSysKCPath = @SYSVOL_SYSKC;
             NSString *sysVolBootKCPath = @SYSVOL_BOOTKC;
-            NSString *prebootBootKCPath = [NSString stringWithFormat: @"/System/Volume/Preboot/%@/boot/%@", getApfsPrebootUUID(), @SYSVOL_BOOTKC];
+            NSString *prebootBootKCPath = [NSString stringWithFormat: @"/System/Volume/Preboot/%@/boot%@", getApfsPrebootUUID(), @SYSVOL_BOOTKC];
             
             NSDictionary *dataVolAuxKCInfo = processKCAtPath(dataVolAuxKCPath);
             NSDictionary *sysVolSysKCInfo = processKCAtPath(sysVolSysKCPath);
@@ -142,8 +160,12 @@ int main(int argc, const char * argv[]) {
             
             // Ensure Preboot BootKC is synced with System BootKC
             if (prebootBootKCInfo && sysVolBootKCInfo) {
-                if (![prebootBootKCInfo[@"_PrelinkKCID"] isEqualToData:prebootBootKCInfo[@"_PrelinkKCID"]]) {
+                if (![prebootBootKCInfo[@"_PrelinkKCID"] isEqualToData:sysVolBootKCInfo[@"_PrelinkKCID"]]) {
+                    NSLog(@"RSRRepair: Preboot BootKC is out of sync with System BootKC. Syncing...");
                     syncPrebootKC(prebootBootKCPath, sysVolBootKCPath);
+                    restartSystem();
+                } else {
+                    NSLog(@"RSRRepair: Preboot BootKC is in sync with System BootKC.");
                 }
             }
         }
