@@ -51,6 +51,8 @@ NSString* getApfsPrebootUUID(void) {
     return prebootUUID;
 }
 
+static bool shouldReboot = false;
+
 NSDictionary *processKCAtPath(NSString *path) {
     NSDictionary *kcPrelinkInfoDict = NULL;
     struct mach_header_64 mh;
@@ -111,27 +113,25 @@ NSDictionary *processKCAtPath(NSString *path) {
 void syncPrebootKC(NSString *prebootPath, NSString *systemPath) {
     NSTask *task    = [[NSTask alloc] init];
     task.launchPath = @"/bin/cp";
-    task.arguments  = [NSArray arrayWithObjects:@"-f", systemPath, prebootPath, nil];
+    task.arguments  = [NSArray arrayWithObjects:@"-f", @"-v", systemPath, prebootPath, nil];
     [task launch];
     [task waitUntilExit];
+    
+    if ([task terminationStatus] == 0) {
+        NSLog(@"RSRRepair: Succeeded in re-syncing Preboot BootKC.");
+        shouldReboot = true;
+    } else {
+        for (int i = 0; i < 10; i++) {
+            NSLog(@"RSRRepair: Failed to re-sync Preboot BootKC. Please manually re-sync the BootKC from Single User Mode.");
+            shouldReboot = false;
+        }
+    }
 }
 
+extern void* reboot3(int how);
 void restartSystem(void) {
-  NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
-
-  char *restartArgs[] = {
-    "/sbin/shutdown",
-    "-r",
-    "now",
-    "RSRRepair is rebooting.",
-    NULL
-  };
-
-  // This should never return.
-  int ret = execv(restartArgs[0], restartArgs);
-  if (ret == -1) {
-    NSLog(@"RSRRepair: Failed to execute %s", restartArgs[0]);
-  }
+    NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
+    reboot3(0);
 }
 
 int main(int argc, const char * argv[]) {
@@ -151,7 +151,7 @@ int main(int argc, const char * argv[]) {
             NSString *dataVolAuxKCPath = @DATAVOL_AUXKC;
             NSString *sysVolSysKCPath = @SYSVOL_SYSKC;
             NSString *sysVolBootKCPath = @SYSVOL_BOOTKC;
-            NSString *prebootBootKCPath = [NSString stringWithFormat: @"/System/Volume/Preboot/%@/boot%@", getApfsPrebootUUID(), @SYSVOL_BOOTKC];
+            NSString *prebootBootKCPath = [NSString stringWithFormat: @"/System/Volumes/Preboot/%@/boot%@", getApfsPrebootUUID(), @SYSVOL_BOOTKC];
             
             NSDictionary *dataVolAuxKCInfo = processKCAtPath(dataVolAuxKCPath);
             NSDictionary *sysVolSysKCInfo = processKCAtPath(sysVolSysKCPath);
@@ -163,7 +163,9 @@ int main(int argc, const char * argv[]) {
                 if (![prebootBootKCInfo[@"_PrelinkKCID"] isEqualToData:sysVolBootKCInfo[@"_PrelinkKCID"]]) {
                     NSLog(@"RSRRepair: Preboot BootKC is out of sync with System BootKC. Syncing...");
                     syncPrebootKC(prebootBootKCPath, sysVolBootKCPath);
-                    restartSystem();
+                    if (shouldReboot) {
+                        restartSystem();
+                    }
                 } else {
                     NSLog(@"RSRRepair: Preboot BootKC is in sync with System BootKC.");
                 }
