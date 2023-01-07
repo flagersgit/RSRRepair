@@ -53,8 +53,8 @@ PluginConfiguration ADDPR(config) {
 
 OSDefineMetaClassAndStructors(RSRRepairClient, super)
 
-void *RSRRepairClient::*_get_bsdtask_info = nullptr;
-UInt8 *RSRRepairClient::*_cs_get_cdhash = nullptr;
+void *(*RSRRepairClient::_get_bsdtask_info)(task_t) = nullptr;
+UInt8 *(*RSRRepairClient::_cs_get_cdhash)(proc_t) = nullptr;
 /* static */
 bool RSRRepairClient::solveNeededSymbols(KernelPatcher &patcher) {
   _get_bsdtask_info = reinterpret_cast<decltype(_get_bsdtask_info)>(patcher.solveSymbol(KernelPatcher::KernelID, "_get_bsdtask_info"));
