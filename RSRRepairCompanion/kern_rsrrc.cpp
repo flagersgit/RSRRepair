@@ -86,7 +86,6 @@ void RSRRepairClient::stop(IOService *provider) {
   super::stop(provider);
 }
 
-static UInt8 cdhashBytes[] = { RSRREPAIR_CDHASH };
 bool RSRRepairClient::initWithTask(task_t owningTask, void *securityToken, UInt32 type, OSDictionary *properties) {
   bool allowed = false;
   if (!owningTask)
@@ -94,25 +93,34 @@ bool RSRRepairClient::initWithTask(task_t owningTask, void *securityToken, UInt3
   
   // Verify identity of task opening this user client.
   proc_t proc = (proc_t)_get_bsdtask_info(owningTask);
+  SYSLOG_COND(!proc, MODULE_SHORT, "failed to get proc for owningTask");
+  DBGLOG_COND(proc, MODULE_SHORT, "got proc for owningTask");
   if (!proc)
     return false;
   
   UInt8 *procCdhash = _cs_get_cdhash(proc);
+  SYSLOG_COND(!proc, MODULE_SHORT, "failed to get procCdhash for proc");
+  DBGLOG_COND(proc, MODULE_SHORT, "got procCdhash for proc");
   if (!procCdhash)
     return false;
   
   if (!memcmp(&cdhashBytes, procCdhash, CS_CDHASH_LEN)) {
+    DBGLOG(MODULE_SHORT, "approved; CDHash matches internal hash");
     allowed = true;
   }
 
 #ifdef DEBUG
   OSData *cdhash = OSDynamicCast(OSData, provider->getProperty("RSRRepair CDHash"));
   
+  SYSLOG_COND(!cdhash, MODULE_SHORT, "failed to get CDHash from provider");
+  DBGLOG_COND(cdhash, MODULE_SHORT, "got CDHash from provider");
   if (!cdhash)
     return false;
   
-  if (cdhash->isEqualTo(procCdhash, CS_CDHASH_LEN))
+  if (cdhash->isEqualTo(procCdhash, CS_CDHASH_LEN)) {
+    DBGLOG(MODULE_SHORT, "approved; CDHash matches Info.plist hash");
     allowed = true;
+  }
 #endif
   
   if (!super::initWithTask(owningTask, securityToken, type))

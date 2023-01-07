@@ -12,7 +12,7 @@
 		817D85B22968C36600023688 /* plugin_start.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D858E2968C2AB00023688 /* plugin_start.cpp */; };
 		817D85B52968C3EB00023688 /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D85B42968C3EB00023688 /* libkmod.a */; };
 		817D85B72968C3F700023688 /* libkmodc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D85B62968C3F700023688 /* libkmodc++.a */; };
-		817D85D42968D13E00023688 /* kern_rsrrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D85D22968D13E00023688 /* kern_rsrrc.cpp */; };
+		817D85D42968D13E00023688 /* kern_rsrrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D85D22968D13E00023688 /* kern_rsrrc.cpp */; settings = {COMPILER_FLAGS = "-include $(TARGET_BUILD_DIR)/cdhash.h"; }; };
 		817D85D52968D13E00023688 /* kern_rsrrc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 817D85D32968D13E00023688 /* kern_rsrrc.hpp */; };
 		81B0C85B281387EC00B1617E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B0C85A281387EC00B1617E /* main.m */; };
 /* End PBXBuildFile section */
@@ -103,7 +103,7 @@
 		817D85D82968D9D800023688 /* UserKernelShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserKernelShared.h; sourceTree = "<group>"; };
 		817D85DA2968EC5100023688 /* getCdhash.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = getCdhash.sh; sourceTree = "<group>"; };
 		817D85EB2969122F00023688 /* package.tool */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = package.tool; sourceTree = "<group>"; };
-		817D85F4296913DB00023688 /* RSRRepair-1.0.0-DEBUG.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "RSRRepair-DEBUG.zip"; path = "RSRRepair-1.0.0-DEBUG.zip"; sourceTree = BUILT_PRODUCTS_DIR; };
+		817D85F4296913DB00023688 /* RSRRepair-DEBUG.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "RSRRepair-DEBUG.zip"; path = "RSRRepair-1.0.0-DEBUG.zip"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0C857281387EC00B1617E /* RSRRepair */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RSRRepair; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0C85A281387EC00B1617E /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; indentWidth = 4; path = main.m; sourceTree = "<group>"; tabWidth = 4; };
 		81C0F7332816936F00B7681A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 			children = (
 				81B0C857281387EC00B1617E /* RSRRepair */,
 				817D857C2967C0FA00023688 /* RSRRepairCompanion.kext */,
-				817D85F4296913DB00023688 /* RSRRepair-1.0.0-DEBUG.zip */,
+				817D85F4296913DB00023688 /* RSRRepair-DEBUG.zip */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -484,7 +484,6 @@
 					"$(inherited)",
 					"MODULE_VERSION=$(MODULE_VERSION)",
 					"PRODUCT_NAME=$(PRODUCT_NAME)",
-					"RSRREPAIR_CDHASH=$(RSRREPAIR_CDHASH)",
 					"LILU_CUSTOM_IOKIT_INIT=1",
 				);
 				GENERATE_INFOPLIST_FILE = NO;
@@ -525,7 +524,6 @@
 					"$(inherited)",
 					"MODULE_VERSION=$(MODULE_VERSION)",
 					"PRODUCT_NAME=$(PRODUCT_NAME)",
-					"RSRREPAIR_CDHASH=$(RSRREPAIR_CDHASH)",
 					"LILU_CUSTOM_IOKIT_INIT=1",
 				);
 				GENERATE_INFOPLIST_FILE = NO;

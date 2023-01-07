@@ -17,9 +17,10 @@ done <<< "$codesignOutput"
 
 if [ "$CONFIGURATION" == "Release" ]; then
   echo Determined CDHash: $CDHash
-  RSRREPAIR_CDHASH=$(printf $CDHash | xxd -r -p | xxd -i)
 fi
 
+printf $CDHash | xxd -r -p | xxd -i -n cdhashBytes > ${TARGET_BUILD_DIR}/cdhash.h
+  
 if [ "$CONFIGURATION" == "Debug" ]; then
   /usr/libexec/PlistBuddy -c 'Import ":IOKitPersonalities:RSRRepairCompanion:RSRRepairCDHash" /dev/stdin' "${TARGET_BUILD_DIR}/RSRRepairCompanion.kext/Contents/Info.plist" <<< "$(printf $CDHash | xxd -r -p)"
 fi
