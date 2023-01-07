@@ -1,6 +1,9 @@
 .DS_Store
 DerivedData
+Lilu.kext
+RSRRepair.kext
 xcuserdata
 project.xcworkspace
 build
 xcshareddata
+/MacKernelSDK

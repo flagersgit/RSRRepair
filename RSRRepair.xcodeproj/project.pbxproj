@@ -7,8 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		817D857F2967C0FA00023688 /* RSRRepairCompanion.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 817D857E2967C0FA00023688 /* RSRRepairCompanion.hpp */; };
+		817D85812967C0FA00023688 /* RSRRepairCompanion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D85802967C0FA00023688 /* RSRRepairCompanion.cpp */; };
+		817D85B22968C36600023688 /* plugin_start.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D858E2968C2AB00023688 /* plugin_start.cpp */; };
+		817D85B52968C3EB00023688 /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D85B42968C3EB00023688 /* libkmod.a */; };
+		817D85B72968C3F700023688 /* libkmodc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D85B62968C3F700023688 /* libkmodc++.a */; };
+		817D85D42968D13E00023688 /* kern_rsrrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 817D85D22968D13E00023688 /* kern_rsrrc.cpp */; };
+		817D85D52968D13E00023688 /* kern_rsrrc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 817D85D32968D13E00023688 /* kern_rsrrc.hpp */; };
 		81B0C85B281387EC00B1617E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81B0C85A281387EC00B1617E /* main.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		817D85DD29690A0300023688 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81B0C84F281387EC00B1617E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81B0C856281387EC00B1617E;
+			remoteInfo = RSRRepair;
+		};
+		817D85F02969130D00023688 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81B0C84F281387EC00B1617E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81B0C856281387EC00B1617E;
+			remoteInfo = RSRRepair;
+		};
+		817D85F22969131000023688 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81B0C84F281387EC00B1617E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 817D857B2967C0FA00023688;
+			remoteInfo = RSRRepairCompanion;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		81B0C855281387EC00B1617E /* CopyFiles */ = {
@@ -23,17 +54,200 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		817D857C2967C0FA00023688 /* RSRRepairCompanion.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSRRepairCompanion.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		817D857E2967C0FA00023688 /* RSRRepairCompanion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RSRRepairCompanion.hpp; sourceTree = "<group>"; };
+		817D85802967C0FA00023688 /* RSRRepairCompanion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RSRRepairCompanion.cpp; sourceTree = "<group>"; };
+		817D85822967C0FA00023688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		817D858A2968C2AB00023688 /* entry64.S */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = entry64.S; sourceTree = "<group>"; };
+		817D858B2968C2AB00023688 /* build.tool */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.tool; sourceTree = "<group>"; };
+		817D858C2968C2AB00023688 /* entry32.S */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = entry32.S; sourceTree = "<group>"; };
+		817D858D2968C2AB00023688 /* wrappers.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = wrappers.inc; sourceTree = "<group>"; };
+		817D858E2968C2AB00023688 /* plugin_start.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = plugin_start.cpp; sourceTree = "<group>"; };
+		817D85902968C2AB00023688 /* kern_config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_config.hpp; sourceTree = "<group>"; };
+		817D85912968C2AB00023688 /* hde64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hde64.h; sourceTree = "<group>"; };
+		817D85922968C2AB00023688 /* kern_time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_time.hpp; sourceTree = "<group>"; };
+		817D85932968C2AB00023688 /* kern_nvram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_nvram.hpp; sourceTree = "<group>"; };
+		817D85942968C2AB00023688 /* kern_cpu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_cpu.hpp; sourceTree = "<group>"; };
+		817D85952968C2AB00023688 /* kern_devinfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_devinfo.hpp; sourceTree = "<group>"; };
+		817D85962968C2AB00023688 /* kern_efi.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_efi.hpp; sourceTree = "<group>"; };
+		817D85972968C2AB00023688 /* kern_policy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_policy.hpp; sourceTree = "<group>"; };
+		817D85982968C2AB00023688 /* kern_user.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_user.hpp; sourceTree = "<group>"; };
+		817D85992968C2AB00023688 /* plugin_start.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = plugin_start.hpp; sourceTree = "<group>"; };
+		817D859A2968C2AB00023688 /* kern_iokit.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_iokit.hpp; sourceTree = "<group>"; };
+		817D859B2968C2AB00023688 /* kern_crypto.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_crypto.hpp; sourceTree = "<group>"; };
+		817D859C2968C2AB00023688 /* kern_mach.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_mach.hpp; sourceTree = "<group>"; };
+		817D859D2968C2AB00023688 /* kern_version.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_version.hpp; sourceTree = "<group>"; };
+		817D859E2968C2AB00023688 /* kern_compression.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_compression.hpp; sourceTree = "<group>"; };
+		817D859F2968C2AB00023688 /* kern_file.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_file.hpp; sourceTree = "<group>"; };
+		817D85A02968C2AB00023688 /* kern_rtc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_rtc.hpp; sourceTree = "<group>"; };
+		817D85A12968C2AB00023688 /* kern_disasm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_disasm.hpp; sourceTree = "<group>"; };
+		817D85A32968C2AB00023688 /* capstone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = capstone.h; sourceTree = "<group>"; };
+		817D85A42968C2AB00023688 /* mips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mips.h; sourceTree = "<group>"; };
+		817D85A52968C2AB00023688 /* sparc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sparc.h; sourceTree = "<group>"; };
+		817D85A62968C2AB00023688 /* systemz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = systemz.h; sourceTree = "<group>"; };
+		817D85A72968C2AB00023688 /* arm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arm.h; sourceTree = "<group>"; };
+		817D85A82968C2AB00023688 /* x86.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = x86.h; sourceTree = "<group>"; };
+		817D85A92968C2AB00023688 /* ppc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
+		817D85AA2968C2AB00023688 /* arm64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arm64.h; sourceTree = "<group>"; };
+		817D85AB2968C2AB00023688 /* xcore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcore.h; sourceTree = "<group>"; };
+		817D85AC2968C2AB00023688 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		817D85AD2968C2AB00023688 /* kern_patcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_patcher.hpp; sourceTree = "<group>"; };
+		817D85AE2968C2AB00023688 /* hde32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hde32.h; sourceTree = "<group>"; };
+		817D85AF2968C2AB00023688 /* kern_compat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_compat.hpp; sourceTree = "<group>"; };
+		817D85B02968C2AB00023688 /* kern_api.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_api.hpp; sourceTree = "<group>"; };
+		817D85B12968C2AB00023688 /* kern_util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_util.hpp; sourceTree = "<group>"; };
+		817D85B42968C3EB00023688 /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libkmod.a; path = MacKernelSDK/Library/x86_64/libkmod.a; sourceTree = "<group>"; };
+		817D85B62968C3F700023688 /* libkmodc++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libkmodc++.a"; path = "MacKernelSDK/Library/universal/libkmodc++.a"; sourceTree = "<group>"; };
+		817D85D22968D13E00023688 /* kern_rsrrc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kern_rsrrc.cpp; sourceTree = "<group>"; };
+		817D85D32968D13E00023688 /* kern_rsrrc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kern_rsrrc.hpp; sourceTree = "<group>"; };
+		817D85D82968D9D800023688 /* UserKernelShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserKernelShared.h; sourceTree = "<group>"; };
+		817D85DA2968EC5100023688 /* getCdhash.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = getCdhash.sh; sourceTree = "<group>"; };
+		817D85EB2969122F00023688 /* package.tool */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = package.tool; sourceTree = "<group>"; };
+		817D85F4296913DB00023688 /* RSRRepair-1.0.0-DEBUG.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "RSRRepair-DEBUG.zip"; path = "RSRRepair-1.0.0-DEBUG.zip"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0C857281387EC00B1617E /* RSRRepair */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RSRRepair; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0C85A281387EC00B1617E /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; indentWidth = 4; path = main.m; sourceTree = "<group>"; tabWidth = 4; };
 		81C0F7332816936F00B7681A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		817D85792967C0FA00023688 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817D85B52968C3EB00023688 /* libkmod.a in Frameworks */,
+				817D85B72968C3F700023688 /* libkmodc++.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		817D857D2967C0FA00023688 /* RSRRepairCompanion */ = {
+			isa = PBXGroup;
+			children = (
+				817D85822967C0FA00023688 /* Info.plist */,
+				817D85D72968D77A00023688 /* IOKit Init */,
+				817D85D22968D13E00023688 /* kern_rsrrc.cpp */,
+				817D85D32968D13E00023688 /* kern_rsrrc.hpp */,
+				817D85D82968D9D800023688 /* UserKernelShared.h */,
+			);
+			path = RSRRepairCompanion;
+			sourceTree = "<group>";
+		};
+		817D85872968C2AB00023688 /* LiluSDK */ = {
+			isa = PBXGroup;
+			children = (
+				817D858F2968C2AB00023688 /* Headers */,
+				817D85882968C2AB00023688 /* Library */,
+			);
+			name = LiluSDK;
+			path = Lilu.kext/Contents/Resources;
+			sourceTree = "<group>";
+		};
+		817D85882968C2AB00023688 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				817D85892968C2AB00023688 /* wrappers */,
+				817D858E2968C2AB00023688 /* plugin_start.cpp */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		817D85892968C2AB00023688 /* wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				817D858A2968C2AB00023688 /* entry64.S */,
+				817D858B2968C2AB00023688 /* build.tool */,
+				817D858C2968C2AB00023688 /* entry32.S */,
+				817D858D2968C2AB00023688 /* wrappers.inc */,
+			);
+			path = wrappers;
+			sourceTree = "<group>";
+		};
+		817D858F2968C2AB00023688 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				817D85902968C2AB00023688 /* kern_config.hpp */,
+				817D85912968C2AB00023688 /* hde64.h */,
+				817D85922968C2AB00023688 /* kern_time.hpp */,
+				817D85932968C2AB00023688 /* kern_nvram.hpp */,
+				817D85942968C2AB00023688 /* kern_cpu.hpp */,
+				817D85952968C2AB00023688 /* kern_devinfo.hpp */,
+				817D85962968C2AB00023688 /* kern_efi.hpp */,
+				817D85972968C2AB00023688 /* kern_policy.hpp */,
+				817D85982968C2AB00023688 /* kern_user.hpp */,
+				817D85992968C2AB00023688 /* plugin_start.hpp */,
+				817D859A2968C2AB00023688 /* kern_iokit.hpp */,
+				817D859B2968C2AB00023688 /* kern_crypto.hpp */,
+				817D859C2968C2AB00023688 /* kern_mach.hpp */,
+				817D859D2968C2AB00023688 /* kern_version.hpp */,
+				817D859E2968C2AB00023688 /* kern_compression.hpp */,
+				817D859F2968C2AB00023688 /* kern_file.hpp */,
+				817D85A02968C2AB00023688 /* kern_rtc.hpp */,
+				817D85A12968C2AB00023688 /* kern_disasm.hpp */,
+				817D85A22968C2AB00023688 /* capstone */,
+				817D85AD2968C2AB00023688 /* kern_patcher.hpp */,
+				817D85AE2968C2AB00023688 /* hde32.h */,
+				817D85AF2968C2AB00023688 /* kern_compat.hpp */,
+				817D85B02968C2AB00023688 /* kern_api.hpp */,
+				817D85B12968C2AB00023688 /* kern_util.hpp */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		817D85A22968C2AB00023688 /* capstone */ = {
+			isa = PBXGroup;
+			children = (
+				817D85A32968C2AB00023688 /* capstone.h */,
+				817D85A42968C2AB00023688 /* mips.h */,
+				817D85A52968C2AB00023688 /* sparc.h */,
+				817D85A62968C2AB00023688 /* systemz.h */,
+				817D85A72968C2AB00023688 /* arm.h */,
+				817D85A82968C2AB00023688 /* x86.h */,
+				817D85A92968C2AB00023688 /* ppc.h */,
+				817D85AA2968C2AB00023688 /* arm64.h */,
+				817D85AB2968C2AB00023688 /* xcore.h */,
+				817D85AC2968C2AB00023688 /* platform.h */,
+			);
+			path = capstone;
+			sourceTree = "<group>";
+		};
+		817D85B32968C3EB00023688 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				817D85B62968C3F700023688 /* libkmodc++.a */,
+				817D85B42968C3EB00023688 /* libkmod.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		817D85D72968D77A00023688 /* IOKit Init */ = {
+			isa = PBXGroup;
+			children = (
+				817D85802967C0FA00023688 /* RSRRepairCompanion.cpp */,
+				817D857E2967C0FA00023688 /* RSRRepairCompanion.hpp */,
+			);
+			name = "IOKit Init";
+			sourceTree = "<group>";
+		};
+		817D85D92968EC3500023688 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				817D85DA2968EC5100023688 /* getCdhash.sh */,
+				817D85EB2969122F00023688 /* package.tool */,
+			);
+			path = Tools;
+			sourceTree = SOURCE_ROOT;
+		};
 		81B0C84E281387EC00B1617E = {
 			isa = PBXGroup;
 			children = (
+				817D85872968C2AB00023688 /* LiluSDK */,
 				81B0C859281387EC00B1617E /* RSRRepair */,
+				817D857D2967C0FA00023688 /* RSRRepairCompanion */,
+				817D85D92968EC3500023688 /* Tools */,
 				81B0C858281387EC00B1617E /* Products */,
+				817D85B32968C3EB00023688 /* Frameworks */,
 				81C0F7332816936F00B7681A /* README.md */,
 			);
 			sourceTree = "<group>";
@@ -42,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				81B0C857281387EC00B1617E /* RSRRepair */,
+				817D857C2967C0FA00023688 /* RSRRepairCompanion.kext */,
+				817D85F4296913DB00023688 /* RSRRepair-1.0.0-DEBUG.zip */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,7 +272,59 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		817D85772967C0FA00023688 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817D857F2967C0FA00023688 /* RSRRepairCompanion.hpp in Headers */,
+				817D85D52968D13E00023688 /* kern_rsrrc.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXLegacyTarget section */
+		817D85EC296912E900023688 /* Package */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 817D85ED296912E900023688 /* Build configuration list for PBXLegacyTarget "Package" */;
+			buildPhases = (
+			);
+			buildToolPath = "${SRCROOT}/Tools/package.tool";
+			buildWorkingDirectory = "";
+			dependencies = (
+				817D85F12969130D00023688 /* PBXTargetDependency */,
+				817D85F32969131000023688 /* PBXTargetDependency */,
+			);
+			name = Package;
+			passBuildSettingsInEnvironment = 1;
+			productName = Package;
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
+		817D857B2967C0FA00023688 /* RSRRepairCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 817D85832967C0FA00023688 /* Build configuration list for PBXNativeTarget "RSRRepairCompanion" */;
+			buildPhases = (
+				817D85DF29690ECE00023688 /* Set RSRREPAIR_CDHASH macro for Release builds */,
+				817D85772967C0FA00023688 /* Headers */,
+				817D85782967C0FA00023688 /* Sources */,
+				817D85792967C0FA00023688 /* Frameworks */,
+				817D857A2967C0FA00023688 /* Resources */,
+				817D85DC2968F43800023688 /* Fill RSRRepair CDHash for Debug builds */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				817D85DE29690A0300023688 /* PBXTargetDependency */,
+			);
+			name = RSRRepairCompanion;
+			productName = RSRRepairCompanion;
+			productReference = 817D857C2967C0FA00023688 /* RSRRepairCompanion.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 		81B0C856281387EC00B1617E /* RSRRepair */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81B0C85E281387EC00B1617E /* Build configuration list for PBXNativeTarget "RSRRepair" */;
@@ -82,13 +350,19 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					817D857B2967C0FA00023688 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					817D85EC296912E900023688 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					81B0C856281387EC00B1617E = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
 			buildConfigurationList = 81B0C852281387EC00B1617E /* Build configuration list for PBXProject "RSRRepair" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -101,11 +375,72 @@
 			projectRoot = "";
 			targets = (
 				81B0C856281387EC00B1617E /* RSRRepair */,
+				817D857B2967C0FA00023688 /* RSRRepairCompanion */,
+				817D85EC296912E900023688 /* Package */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		817D857A2967C0FA00023688 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		817D85DC2968F43800023688 /* Fill RSRRepair CDHash for Debug builds */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fill RSRRepair CDHash for Debug builds";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${TARGET_BUILD_DIR}\"\n\nsource \"${PROJECT_DIR}/Tools/getCdhash.sh\" \"DEBUG\"\n";
+		};
+		817D85DF29690ECE00023688 /* Set RSRREPAIR_CDHASH macro for Release builds */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set RSRREPAIR_CDHASH macro for Release builds";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${TARGET_BUILD_DIR}\"\n\nsource \"${PROJECT_DIR}/Tools/getCdhash.sh\" \"RELEASE\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		817D85782967C0FA00023688 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817D85812967C0FA00023688 /* RSRRepairCompanion.cpp in Sources */,
+				817D85D42968D13E00023688 /* kern_rsrrc.cpp in Sources */,
+				817D85B22968C36600023688 /* plugin_start.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81B0C853281387EC00B1617E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,11 +451,143 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		817D85DE29690A0300023688 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81B0C856281387EC00B1617E /* RSRRepair */;
+			targetProxy = 817D85DD29690A0300023688 /* PBXContainerItemProxy */;
+		};
+		817D85F12969130D00023688 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81B0C856281387EC00B1617E /* RSRRepair */;
+			targetProxy = 817D85F02969130D00023688 /* PBXContainerItemProxy */;
+		};
+		817D85F32969131000023688 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 817D857B2967C0FA00023688 /* RSRRepairCompanion */;
+			targetProxy = 817D85F22969131000023688 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		817D85842967C0FA00023688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"MODULE_VERSION=$(MODULE_VERSION)",
+					"PRODUCT_NAME=$(PRODUCT_NAME)",
+					"RSRREPAIR_CDHASH=$(RSRREPAIR_CDHASH)",
+					"LILU_CUSTOM_IOKIT_INIT=1",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Lilu.kext/Contents/Resources";
+				INFOPLIST_FILE = "$(SRCROOT)/RSRRepairCompanion/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
+					"$(PROJECT_DIR)/MacKernelSDK/Library/universal",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				MODULE_NAME = com.flagers.RSRRepairCompanion;
+				MODULE_START = "$(PRODUCT_NAME)_kern_start";
+				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flagers.RSRRepairCompanion;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Debug;
+		};
+		817D85852967C0FA00023688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"MODULE_VERSION=$(MODULE_VERSION)",
+					"PRODUCT_NAME=$(PRODUCT_NAME)",
+					"RSRREPAIR_CDHASH=$(RSRREPAIR_CDHASH)",
+					"LILU_CUSTOM_IOKIT_INIT=1",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Lilu.kext/Contents/Resources";
+				INFOPLIST_FILE = "$(SRCROOT)/RSRRepairCompanion/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
+					"$(PROJECT_DIR)/MacKernelSDK/Library/universal",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				MODULE_NAME = com.flagers.RSRRepairCompanion;
+				MODULE_START = "$(PRODUCT_NAME)_kern_start";
+				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flagers.RSRRepairCompanion;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Release;
+		};
+		817D85EE296912E900023688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MODULE_VERSION = 1.0.0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = RSRRepair;
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		817D85EF296912E900023688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MODULE_VERSION = 1.0.0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = RSRRepair;
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
 		81B0C85C281387EC00B1617E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -180,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -249,6 +717,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		817D85832967C0FA00023688 /* Build configuration list for PBXNativeTarget "RSRRepairCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817D85842967C0FA00023688 /* Debug */,
+				817D85852967C0FA00023688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		817D85ED296912E900023688 /* Build configuration list for PBXLegacyTarget "Package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817D85EE296912E900023688 /* Debug */,
+				817D85EF296912E900023688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		81B0C852281387EC00B1617E /* Build configuration list for PBXProject "RSRRepair" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

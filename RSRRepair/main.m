@@ -10,6 +10,7 @@
 #include <mach-o/loader.h>
 #include <IOKit/IOKitLib.h>
 #include <libproc.h>
+#include "UserKernelShared.h"
 
 #define SYSVOL_BOOTKC "/System/Library/KernelCollections/BootKernelExtensions.kc"
 #define SYSVOL_SYSKC "/System/Library/KernelCollections/SystemKernelExtensions.kc"
@@ -128,10 +129,27 @@ void syncPrebootKC(NSString *prebootPath, NSString *systemPath) {
     }
 }
 
-extern void* reboot3(int how);
 void restartSystem(void) {
     NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
-    reboot3(0);
+    io_connect_t dataPort;
+      
+    CFMutableDictionaryRef dict = IOServiceMatching("RSRRepairCompanion");
+      
+    io_service_t service = IOServiceGetMatchingService(kIOMasterPortDefault, dict);
+      
+    if (!service) {
+      NSLog(@"Could not locate RSRRepairCompanion. Please reboot manually.");
+      return;
+    }
+      
+    kern_return_t kr = IOServiceOpen(service, mach_task_self(), 0, &dataPort);
+      
+    IOObjectRelease(service);
+    
+    kr = IOConnectCallScalarMethod(dataPort, kMethodDoReboot, NULL, NULL, NULL, NULL);
+    if (kr != KERN_SUCCESS) {
+        NSLog(@"RSRRepair: Failed to call kMethodDoReboot in kernelspace companion.");
+    }
 }
 
 int main(int argc, const char * argv[]) {
@@ -153,8 +171,10 @@ int main(int argc, const char * argv[]) {
             NSString *sysVolBootKCPath = @SYSVOL_BOOTKC;
             NSString *prebootBootKCPath = [NSString stringWithFormat: @"/System/Volumes/Preboot/%@/boot%@", getApfsPrebootUUID(), @SYSVOL_BOOTKC];
             
+            /*
             NSDictionary *dataVolAuxKCInfo = processKCAtPath(dataVolAuxKCPath);
             NSDictionary *sysVolSysKCInfo = processKCAtPath(sysVolSysKCPath);
+            */
             NSDictionary *sysVolBootKCInfo = processKCAtPath(sysVolBootKCPath);
             NSDictionary *prebootBootKCInfo = processKCAtPath(prebootBootKCPath);
             
