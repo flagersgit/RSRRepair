@@ -3,7 +3,7 @@
 Userspace binary and companion kernel extension to
 recover from desynced kernel cache artifacts.
 
-A Rapid *Stability* Response to [Rapid Security Response-induced issues] (https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)
+A Rapid *Stability* Response to [Rapid Security Response-induced issues](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)
 
 #### Userspace binary arguments
 - `--install` to manually install the binary to `/etc/rc.server`
