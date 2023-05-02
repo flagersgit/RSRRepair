@@ -15,12 +15,36 @@
 // Project headers
 #include "kern_rsrrc.hpp"
 
+static UInt64 userspaceReport = kNoReportYet;
+static mach_vm_address_t orgValidateKCUUIDFromPrelinkInfo {};
+int wrapValidateKCUUIDFromPrelinkInfo(uuid_t *loaded_kcuuid, kc_kind_t type, OSDictionary *infoDict, const char *uuid_key) {
+  int kcReturn = FunctionCast(wrapValidateKCUUIDFromPrelinkInfo, orgValidateKCUUIDFromPrelinkInfo)(loaded_kcuuid, type, infoDict, uuid_key);
+
+  for (int loops = 0; userspaceReport == kNoReportYet; loops++) {
+    SYSLOG(MODULE_SHORT, "%s: looped %i times; waiting 2 seconds", __FUNCTION__, loops);
+    IOSleep(2000);
+    if (loops == 15)
+      break;
+  }
+  if (userspaceReport == kReportShouldReboot) {
+    SYSLOG(MODULE_SHORT, "%s: restarting now", __FUNCTION__);
+    PEHaltRestart(kPERestartCPU);
+  } else {
+    SYSLOG(MODULE_SHORT, "%s: continuing boot", __FUNCTION__);
+  }
+  
+  return kcReturn;
+}
+
 #pragma mark - Plugin start
 static void pluginStart() {
   DBGLOG(MODULE_SHORT, "start");
   
   lilu.onPatcherLoadForce([](void *user, KernelPatcher &patcher) {
     RSRRepairClient::solveNeededSymbols(patcher);
+    KernelPatcher::RouteRequest csRoute = KernelPatcher::RouteRequest("__ZN6OSKext29validateKCUUIDfromPrelinkInfoEPA16_h7kc_kindP12OSDictionaryPKc", wrapValidateKCUUIDFromPrelinkInfo, orgValidateKCUUIDFromPrelinkInfo);
+          if (!patcher.routeMultipleLong(KernelPatcher::KernelID, &csRoute, 1))
+                SYSLOG(MODULE_SHORT, "failed to route KC UUID validation function");
   });
 };
 
@@ -133,9 +157,9 @@ bool RSRRepairClient::initWithTask(task_t owningTask, void *securityToken, UInt3
 
 /* static */
 const IOExternalMethodDispatch RSRRepairClient::sMethods[kNumberOfMethods] = {
-  { // kMethodDoReboot
-    reinterpret_cast<IOExternalMethodAction>(&RSRRepairClient::methodDoReboot),
-    0 /* checkScalarInputCount     */,
+  { // kMethodReportAction
+    reinterpret_cast<IOExternalMethodAction>(&RSRRepairClient::methodReportAction),
+    1 /* checkScalarInputCount     */,
     0 /* checkStructureInputSize   */,
     0 /* checkScalarOutputCount    */,
     0 /* checkStructureOutputSize  */
@@ -149,14 +173,20 @@ IOReturn RSRRepairClient::externalMethod(uint32_t selector, IOExternalMethodArgu
   dispatch = const_cast<IOExternalMethodDispatch *>(&sMethods[selector]);
   
   target = provider;
-  reference = NULL;
+  reference = this;
   
   return super::externalMethod(selector, arguments, dispatch, target, reference);
 }
 
 /* static */
-IOReturn RSRRepairClient::methodDoReboot(IOService *target, void *ref, IOExternalMethodArguments *args) {
-  SYSLOG(MODULE_SHORT, "rebooting machine as requested by RSRRepair from userspace");
-  PEHaltRestart(kPERestartCPU);
+IOReturn RSRRepairClient::methodReportAction(IOService *target, void *ref, IOExternalMethodArguments *args) {
+  if (args->scalarInputCount != sMethods[kMethodReportAction].checkScalarInputCount)
+    return kIOReturnBadArgument;
+  
+  if (args->scalarInput[0] > kNumberOfReports)
+    return kIOReturnBadArgument;
+  
+  userspaceReport = args->scalarInput[0];
+  
   return kIOReturnSuccess;
 }

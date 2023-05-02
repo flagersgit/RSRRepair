@@ -52,7 +52,7 @@ NSString* getApfsPrebootUUID(void) {
     return prebootUUID;
 }
 
-static bool shouldReboot = false;
+static uint64_t kernelReport = kNoReportYet;
 
 NSDictionary *processKCAtPath(NSString *path) {
     NSDictionary *kcPrelinkInfoDict = NULL;
@@ -120,17 +120,39 @@ void syncPrebootKC(NSString *prebootPath, NSString *systemPath) {
     
     if ([task terminationStatus] == 0) {
         NSLog(@"RSRRepair: Succeeded in re-syncing Preboot BootKC.");
-        shouldReboot = true;
+        kernelReport = kReportShouldReboot;
     } else {
         for (int i = 0; i < 10; i++) {
-            NSLog(@"RSRRepair: Failed to re-sync Preboot BootKC. Please manually re-sync the BootKC from Single User Mode.");
-            shouldReboot = false;
+            NSLog(@"RSRRepair: Failed to re-sync Preboot BootKC. Please manually re-sync the BootKC from Single User Mode or recoveryOS.");
+            kernelReport = kReportCanContinue;
         }
     }
 }
 
-void restartSystem(void) {
-    NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
+void deleteAuxKC(void) {
+    NSTask *task    = [[NSTask alloc] init];
+    task.launchPath = @"/bin/rm";
+    task.arguments  = [NSArray arrayWithObjects:@"-f", @"-v", @"/Library/KernelCollections/AuxiliaryKernelExtensions.kc", nil];
+    [task launch];
+    [task waitUntilExit];
+    
+    if ([task terminationStatus] == 0) {
+        NSLog(@"RSRRepair: Succeeded in deleting AuxKC");
+        kernelReport = kReportShouldReboot;
+    } else {
+        for (int i = 0; i < 10; i++) {
+            NSLog(@"RSRRepair: Failed to delete AuxKC. Please manually delete the AuxKC from Single User Mode or recoveryOS.");
+            kernelReport = kReportCanContinue;
+        }
+    }
+}
+
+void reportToKernelspace(uint64_t report) {
+    if (report == kReportShouldReboot)
+        NSLog(@"RSRRepair: Restarting macOS after syncing BootKC artifacts.");
+    if (report == kReportCanContinue)
+        NSLog(@"RSRRepair: Allowing RSRRepairCompanion to continue.");
+    
     io_connect_t dataPort;
       
     CFMutableDictionaryRef dict = IOServiceMatching("RSRRepairCompanion");
@@ -138,17 +160,21 @@ void restartSystem(void) {
     io_service_t service = IOServiceGetMatchingService(kIOMasterPortDefault, dict);
       
     if (!service) {
-      NSLog(@"Could not locate RSRRepairCompanion. Please reboot manually.");
-      return;
+        if (report == kReportShouldReboot)
+            NSLog(@"Could not locate RSRRepairCompanion. Please reboot manually.");
+        if (report == kReportCanContinue)
+            NSLog(@"Could not locate RSRRepairCompanion. Will continue after 30 seconds.");
+        return;
     }
       
     kern_return_t kr = IOServiceOpen(service, mach_task_self(), 0, &dataPort);
       
     IOObjectRelease(service);
     
-    kr = IOConnectCallScalarMethod(dataPort, kMethodDoReboot, NULL, NULL, NULL, NULL);
+    uint64_t scalarInput[1] = { report };
+    kr = IOConnectCallScalarMethod(dataPort, kMethodReportAction, scalarInput, 1, NULL, NULL);
     if (kr != KERN_SUCCESS) {
-        NSLog(@"RSRRepair: Failed to call kMethodDoReboot in kernelspace companion.");
+        NSLog(@"RSRRepair: Failed to call kMethodReportAction in kernelspace companion.");
     }
 }
 
@@ -183,11 +209,10 @@ int main(int argc, const char * argv[]) {
                 if (![prebootBootKCInfo[@"_PrelinkKCID"] isEqualToData:sysVolBootKCInfo[@"_PrelinkKCID"]]) {
                     NSLog(@"RSRRepair: Preboot BootKC is out of sync with System BootKC. Syncing...");
                     syncPrebootKC(prebootBootKCPath, sysVolBootKCPath);
-                    if (shouldReboot) {
-                        restartSystem();
-                    }
+                    reportToKernelspace(kernelReport);
                 } else {
                     NSLog(@"RSRRepair: Preboot BootKC is in sync with System BootKC.");
+                    reportToKernelspace(kReportCanContinue);
                 }
             }
         }

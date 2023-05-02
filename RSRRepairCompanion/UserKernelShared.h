@@ -9,9 +9,18 @@
 #define UserKernelShared_h
 
 enum {
-  kMethodDoReboot,
+  kMethodReportAction,
   
   kNumberOfMethods // Always last
+};
+
+enum {
+  kReportCanContinue,
+  kReportShouldReboot,
+  
+  kNumberOfReports, // Always second to last
+  
+  kNoReportYet = 0xff
 };
 
 #endif /* UserKernelShared_h */

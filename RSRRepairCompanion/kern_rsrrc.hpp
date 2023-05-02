@@ -40,8 +40,17 @@ public:
                           void *reference) APPLE_KEXT_OVERRIDE;
   
   // IOUserClient Methods
-  static IOReturn methodDoReboot(IOService *target, void *ref,
-                                 IOExternalMethodArguments *args);
+  static IOReturn methodReportAction(IOService *target, void *ref,
+                                     IOExternalMethodArguments *args);
 };
+
+typedef enum kc_kind {
+  KCKindNone      = -1,
+  KCKindUnknown   = 0,
+  KCKindPrimary   = 1,
+  KCKindPageable  = 2,
+  KCKindAuxiliary = 3,
+  KCNumKinds      = 4,
+} kc_kind_t;
 
 #endif /* kern_rsrrc_hpp */
